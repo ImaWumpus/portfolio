@@ -6,4 +6,21 @@ if(!isset($auth)){
     die();
     }
 }
+
+
+if(!isset($_SESSION['csrf'])){
+    $_SESSION['crsf'] = md5(time() + rand());
+}
+
+function csrf(){
+    return 'csrf=' . $_SESSION['csrf'];
+}
+
+function checkCsrf(){
+    if(!isset($_GET['csrf']) || $_GET['csrf'] != $_SESSION['csrf']){
+        header('Location:' . WEBROOT . 'csrf.php');
+        die();
+    }
+
+}
 ?>

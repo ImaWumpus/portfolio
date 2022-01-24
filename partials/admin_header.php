@@ -21,7 +21,7 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="categorie.php">Categories</a>
+                        <a href="category.php">Categories</a>
                     </li>
                 </ul>
             </div>
