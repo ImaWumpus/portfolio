@@ -21,18 +21,16 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="category.php">Categories</a>
+                        <a href="category.php">Catégories</a>
+                        <a href="work.php">Réalisations</a>
                     </li>
                 </ul>
             </div>
         </div>
-
         <div class="container">
 
             <p>&nbsp;</p>
             <p>&nbsp;</p>
             <p>&nbsp;</p>
 
-            <?php flash(); ?>
-
-
+            <?= flash(); ?>

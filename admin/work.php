@@ -10,7 +10,7 @@ include '../partials/admin_header.php';
 if(isset($_GET['delete'])){
     checkCsrf();
     $id = $db->quote($_GET['delete']);
-    $db->query("DELETE FROM categories WHERE id=$id");
+    $db->query("DELETE FROM work WHERE id=$id");
     setFlash('La catégorie a bien été suprimée');
     header('Location:category.php');
     die();
@@ -19,15 +19,15 @@ if(isset($_GET['delete'])){
 /**
  * Catégorie
  */
-$select = $db->query('SELECT id, name, slug FROM categories');
-$categories = $select->fetchAll();
+$select = $db->query('SELECT id, name, slug FROM works');
+$works = $select->fetchAll();
 ?>
 
 
 
-<h1>Les catégories</h1>
+<h1>Mes réalisations</h1>
 
-<p><a href="category_edit.php" class="btn btn-success">Ajouter une nouvelle catégorie</a></p>
+<p><a href="work_edit.php" class="btn btn-success">Ajouter une nouvelle réalisations</a></p>
 
 <table class="table table-striped">
     <thead>
@@ -38,12 +38,12 @@ $categories = $select->fetchAll();
         </tr>
     </thead>
     <tbody>
-        <?php foreach($categories as $category): ?>
+        <?php foreach($works as $category): ?>
         <tr>
             <td><?= $category['id']; ?></td>
             <td><?= $category['name']; ?></td>
             <td>
-                <a href="category_edit.php?id<?= $category['id']; ?>" class="btn btn-default">Edit</a>
+                <a href="work_edit.php?id<?= $category['id']; ?>" class="btn btn-default">Edit</a>
                 <a href="?delete=<?= $category['id']; ?>&<?= csrf(); ?>" class="btn btn-error" onclick="return confirm('Voulez-vous vraiment supprimer ?');">Supprimer</a>
             </td>
         </tr>
