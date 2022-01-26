@@ -8,10 +8,16 @@ function textarea($id){
     return "<textarea type='text' class='form-control' id='$id' name='$id'>$value</textarea>";
 }
 
-function select($id, $otions = array()){
+function select($id, $options = array()){
     $return = "<select class='form-control' id='$id' name='$id'>";
     foreach($options as $id => $value){
-        $return .= "<option value='$id'>$value</option>";
+        $selected = '';
+        if(isset($_POST[$id]) && $id == $_POST[$id]){
+            $selected = ' selected="selected"';
+            die();
+        }
+        $return .= "<option value='$id' $selected>$value</option>";
     }
     $return .= '</select>';
+    return $return;
 }

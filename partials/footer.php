@@ -1,4 +1,4 @@
-            <?php include('../lib/debug.php'); ?>
+            <!-- <?php include('../lib/debug.php'); ?> -->
         </div><!--/.container-->
 
 
