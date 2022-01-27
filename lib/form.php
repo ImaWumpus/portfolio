@@ -10,13 +10,12 @@ function textarea($id){
 
 function select($id, $options = array()){
     $return = "<select class='form-control' id='$id' name='$id'>";
-    foreach($options as $id => $value){
+    foreach($options as $k => $v){
         $selected = '';
-        if(isset($_POST[$id]) && $id == $_POST[$id]){
+        if(isset($_POST[$id]) && $k == $_POST[$id]){
             $selected = ' selected="selected"';
-            die();
         }
-        $return .= "<option value='$id' $selected>$value</option>";
+        $return .= "<option value='$k' $selected>$v</option>";
     }
     $return .= '</select>';
     return $return;
