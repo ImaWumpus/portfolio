@@ -1,4 +1,5 @@
 # portfolio
 portfolio web
-trouver le moyen de lier tinymce directement sans avoir les fichiers en local
-https://www.tiny.cloud/docs/quick-start/
+Trouver un moyen pour l'authentification
+Créer un auth spécialement pour les admin
+Faire des niveau de droits pour tout les utilisateurs
