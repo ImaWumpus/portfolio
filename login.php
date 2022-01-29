@@ -14,6 +14,9 @@ if(isset($_POST['username']) && isset($_POST['password'])){
         setFlash('Vous etes maintenant connecté');
         header('Location:' . WEBROOT . 'admin/index.php');
         die();
+    
+    }else{
+        setFlash('Nom d\'utilisateur ou mot de passe non valide', 'danger');
     }
 }
 

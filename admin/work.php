@@ -10,7 +10,7 @@ include '../partials/admin_header.php';
 if(isset($_GET['delete'])){
     checkCsrf();
     $id = $db->quote($_GET['delete']);
-    $db->query("DELETE FROM work WHERE id=$id");
+    $db->query("DELETE FROM works WHERE id=$id");
     setFlash('La réalisation a bien été suprimée');
     header('Location:work.php');
     die();

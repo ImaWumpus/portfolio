@@ -63,7 +63,7 @@ include '../partials/admin_header.php';
     </div>
     <div class="form-group">
         <label for="content">Contenu de la réalisation</label>
-        <?= textarea('content'); ?>
+        <textarea id="mytextarea"></textarea>
     </div>
     <div class="form-group">
         <label for="category_id">Catégorie</label>
@@ -72,7 +72,5 @@ include '../partials/admin_header.php';
     <?= csrfInput(); ?>
     <button type="submit" class="btn btn-default">Enregistrer</button>
 </form>
-
-
 
 <?php include '../partials/footer.php'; ?>
