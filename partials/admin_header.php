@@ -22,6 +22,7 @@
       toolbar_mode: 'floating',
       tinycomments_mode: 'embedded',
       tinycomments_author: 'Mael Cadiou',
+      language: 'fr_FR',
     });
     </script>
 
@@ -32,7 +33,7 @@
         <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="#">Mon premier Portfolio en PHP</a>
+                    <a class="navbar-brand" href="index.php">Mon premier Portfolio en PHP</a>
                 </div>
                 <ul class="nav navbar-nav">
                     <li>

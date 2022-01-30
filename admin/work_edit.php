@@ -9,13 +9,27 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
         $slug = $db->quote($_POST['slug']);
         $category_id = $db->quote($_POST['category_id']);
         $content = $db->quote($_POST['content']);
+
+        /**
+         * SAUVEGARDE de la réalisation
+         */
+        
         if(isset($_GET['id'])){
             $id = $db->quote($_GET['id']);
             $db->query("UPDATE works SET name=$name, slug=$slug, content=$content, category_id=$category_id WHERE id=$id");
         }else{
             $db->query("INSERT INTO works SET name=$name, slug=$slug, content=$content, category_id=$category_id");
+            $_GET['id'] = $db->lastInsertId();
         }
         setFlash('La réalisation à bien été ajoutée');
+       
+        /**
+         * ENVOIS des images
+         */
+        $work_id = $_GET['id'];
+        $image = 
+
+
         header('Location:work.php');
         die();
     }else{
@@ -52,7 +66,7 @@ include '../partials/admin_header.php';
 <h1>Editer une réalisation</h1>
 
 
-<form action="#" method="post">
+<form action="#" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Nom de la réalisation</label>
         <?= input('name'); ?>
@@ -63,13 +77,16 @@ include '../partials/admin_header.php';
     </div>
     <div class="form-group">
         <label for="content">Contenu de la réalisation</label>
-        <textarea id="mytextarea"></textarea>
+        <?= textarea('content'); ?>
     </div>
     <div class="form-group">
         <label for="category_id">Catégorie</label>
         <?= select('category_id', $categories_list); ?>
     </div>
     <?= csrfInput(); ?>
+    <div class="form-group">
+        <input type="file" name="image">
+    </div>
     <button type="submit" class="btn btn-default">Enregistrer</button>
 </form>
 

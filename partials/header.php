@@ -14,7 +14,7 @@
     </head>
 
     <body>
-    <!--
+    
         <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-    -->
+   
         <div class="container">
 
             <p>&nbsp;</p>
