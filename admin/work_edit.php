@@ -26,11 +26,22 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
         /**
          * ENVOIS des images
          */
-        $work_id = $_GET['id'];
-        $image = 
+        $work_id = $db->quote($_GET['id']);
+        $image = $_FILES['image'];
+        $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+        if(in_array($extension, array('jpg', 'png'))){
+            $db->query("INSERT INTO images SET work_id = $work_id");
+            $image_id = $db->lastInsertId();
+            $image_name = $image_id . '.' . $extension;
+            move_uploaded_file($image['tmp_name'], IMAGES . '/works/' . $image_name);
+            $image_name = $db->quote($image_name);
+            $db->query("UPDATE images SET name=$image_name WHERE id = $image_id");
+
+        }
 
 
-        header('Location:work.php');
+
+        // header('Location:work.php');
         die();
     }else{
         setFlash('Le slug n\'est pas valide', 'danger');
