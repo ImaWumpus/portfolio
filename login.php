@@ -12,7 +12,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     if($select->rowCount() > 0){
         $_SESSION['Auth'] = $select->fetch();
         setFlash('Vous etes maintenant connecté');
-        header('Location:' . WEBROOT . 'portfolio/admin/index.php');
+        header('Location:' . WEBROOT . 'admin/index.php');
         die();
     
     }else{
