@@ -9,14 +9,39 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
         $slug = $db->quote($_POST['slug']);
         $category_id = $db->quote($_POST['category_id']);
         $content = $db->quote($_POST['content']);
+
+        /**
+         * SAUVEGARDE de la réalisation
+         */
+        
         if(isset($_GET['id'])){
             $id = $db->quote($_GET['id']);
             $db->query("UPDATE works SET name=$name, slug=$slug, content=$content, category_id=$category_id WHERE id=$id");
         }else{
             $db->query("INSERT INTO works SET name=$name, slug=$slug, content=$content, category_id=$category_id");
+            $_GET['id'] = $db->lastInsertId();
         }
         setFlash('La réalisation à bien été ajoutée');
-        header('Location:work.php');
+       
+        /**
+         * ENVOIS des images
+         */
+        $work_id = $db->quote($_GET['id']);
+        $image = $_FILES['image'];
+        $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
+        if(in_array($extension, array('jpg', 'png'))){
+            $db->query("INSERT INTO images SET work_id = $work_id");
+            $image_id = $db->lastInsertId();
+            $image_name = $image_id . '.' . $extension;
+            move_uploaded_file($image['tmp_name'], IMAGES . '/works/' . $image_name);
+            $image_name = $db->quote($image_name);
+            $db->query("UPDATE images SET name=$image_name WHERE id = $image_id");
+
+        }
+
+
+
+        // header('Location:work.php');
         die();
     }else{
         setFlash('Le slug n\'est pas valide', 'danger');
@@ -52,7 +77,7 @@ include '../partials/admin_header.php';
 <h1>Editer une réalisation</h1>
 
 
-<form action="#" method="post">
+<form action="#" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="name">Nom de la réalisation</label>
         <?= input('name'); ?>
@@ -63,13 +88,16 @@ include '../partials/admin_header.php';
     </div>
     <div class="form-group">
         <label for="content">Contenu de la réalisation</label>
-        <textarea id="mytextarea"></textarea>
+        <?= textarea('content'); ?>
     </div>
     <div class="form-group">
         <label for="category_id">Catégorie</label>
         <?= select('category_id', $categories_list); ?>
     </div>
     <?= csrfInput(); ?>
+    <div class="form-group">
+        <input type="file" name="image">
+    </div>
     <button type="submit" class="btn btn-default">Enregistrer</button>
 </form>
 
