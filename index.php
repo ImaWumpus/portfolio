@@ -1,6 +1,7 @@
 <?php 
 $auth = 0;
 include 'lib/includes.php';
+include 'lib/image.php';
 include 'partials/header.php';
 
 $select = $db->query("
@@ -14,10 +15,11 @@ $works = $select->fetchAll();
 
 <div class="row">
     <?php foreach ($works as $k => $work): ?>
-        <div class="col_sm-3">
+        <div class="col-sm-3">
             <a href="view.php?id=<?= $work['id']; ?>">
-                <img src="<?= WEBROOT; ?>portfolio/img/works/<?= $work['image_name']; ?>" alt="">
+                <img src="<?= WEBROOT; ?>img/works/<?= resizedName($work['image_name'], 150, 150); ?>" alt="">
                 <h2><?= $work['name']; ?></h2>
+                <?= resizedName($work['image_name'], 150, 150); ?>
             </a>
         </div>
     <?php endforeach ?>

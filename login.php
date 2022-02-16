@@ -12,7 +12,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
     if($select->rowCount() > 0){
         $_SESSION['Auth'] = $select->fetch();
         setFlash('Vous etes maintenant connecté');
-        header('Location:' . WEBROOT . 'portfolio/admin/index.php');
+        header('Location:' . WEBROOT . 'admin/index.php');
         die();
     
     }else{
@@ -38,5 +38,4 @@ include 'partials/header.php';
     <button type="submit" class="btn-default">Se connecter</button>
 </form>
 
-<?php include 'lib/debug.php'; ?>
 <?php include 'partials/footer.php'; ?>

@@ -32,6 +32,7 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
         $work_id = $db->quote($_GET['id']);
         $files = $_FILES['images'];
         $images = array();
+        require '../lib/image.php';
         foreach($files['tmp_name'] as $k => $v){
             $image = array('name' => $files['name'][$k], 'tmp_name' => $files['tmp_name'][$k]);
             $extension = pathinfo($image['name'], PATHINFO_EXTENSION);
@@ -40,6 +41,7 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
                 $image_id = $db->lastInsertId();
                 $image_name = $image_id . '.' . $extension;
                 move_uploaded_file($image['tmp_name'], IMAGES . '/works/' . $image_name);
+                resizeImage(IMAGES . '/works/' . $image_name, 150,150);
                 $image_name = $db->quote($image_name);
                 $db->query("UPDATE images SET name=$image_name WHERE id = $image_id");
             }
@@ -78,6 +80,12 @@ if(isset($_GET['delete_image'])){
     $id = $db->quote($_GET['delete_image']);
     $select = $db->query("SELECT name, work_id FROM images WHERE id=$id");
     $image = $select->fetch();
+    $images = glob(IMAGES . '/works/' . pathinfo($image['name'], PATHINFO_FILENAME) . '_*x*.*');
+    if(is_array($images)){
+        foreach($images as $v){
+            unlink($v);
+        }
+    }
     unlink(IMAGES . '/works/' . $image['name']);
     $db->query("DELETE FROM images WHERE id=$id");
     setFlash("L'image a bien été supprimée");
@@ -94,8 +102,8 @@ if(isset($_GET['highlight_image'])){
     $image_id = $db->quote($_GET['highlight_image']);
     $db->query("UPDATE works SET image_id=$image_id WHERE id=$work_id");
     setFlash("L'image a bien été mise en avant");
-    // header('Location:work_edit.php?id=' . $image['id']);
-    // die();
+    header('Location:work_edit.php?id=' . $_GET['id']);
+    die();
 }
 
 
@@ -162,9 +170,9 @@ include '../partials/admin_header.php';
 
     <div class="col-sm-4">
         <?php foreach ($images as $k => $image): ?>
-            <p><img src="<?= WEBROOT; ?>portfolio/img/works/<?= $image['name']; ?>" width="100">
+            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>" width="100">
             <a href="?delete_image=<?= $image['id']; ?>& <?= csrf(); ?>" onclick="return confirm('Etes vous sur de vouloir suprimer cette image ?');">Supprimer l'image</a>
-            <a href="?highlight_image=<?= $image['id']; ?>>&id=<?= $_GET['id']; ?>&<?= csrf(); ?>">Mettre à la une</a>
+            <a href="?highlight_image=<?= $image['id']; ?>&id=<?= $_GET['id']; ?>&<?= csrf(); ?>">Mettre à la une</a>
             </p>
         <?php endforeach ?>
         
@@ -182,6 +190,21 @@ include '../partials/admin_header.php';
 
 })(jQuery);
 </script>
+<?php ob_start(); ?>
+        <script src="https://cdn.tiny.cloud/1/eijs0o38u97wpb94p4rkfy6646b0r9g0grgkr7wh48rry4qi/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
+    <script>
+      tinymce.init({
+      selector: 'textarea',
+      plugins: 'a11ychecker advcode casechange export formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+      toolbar: 'a11ycheck addcomment showcomments casechange checklist code export formatpainter pageembed permanentpen table',
+      toolbar_mode: 'floating',
+      tinycomments_mode: 'embedded',
+      tinycomments_author: 'Mael Cadiou',
+      language: 'fr_FR',
+    });
+    </script>
+
+    <?php $script = ob_get_clean(); ?>
 
 <?php include '../partials/footer.php'; ?>

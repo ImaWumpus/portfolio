@@ -29,7 +29,7 @@ include 'partials/header.php';
 <?= $work['content']; ?>
 
 <?php foreach ($images as $k => $image): ?>
-    <img src="<?= WEBROOT; ?>portfolio/img/works/<?= $image['name']; ?>">
+    <img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>">
 <?php endforeach ?>
 
 

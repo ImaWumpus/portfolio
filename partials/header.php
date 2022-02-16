@@ -19,7 +19,7 @@
         <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="/portfolio">Mon premier Portfolio en PHP</a>
+                    <a class="navbar-brand" href="<?= WEBROOT; ?>">Mon premier Portfolio en PHP</a>
                 </div>
             </div>
         </div>
