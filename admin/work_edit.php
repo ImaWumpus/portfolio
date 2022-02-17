@@ -158,7 +158,7 @@ include '../partials/admin_header.php';
             </div>
             <?= csrfInput(); ?>
             <div class="form-group">
-                <!-- <input type="file" name="images[]"> -->
+                <input type="file" name="images[]">
                 <input type="file" name="images[]" class="hidden" id="duplicate">
             </div>
             <p>
@@ -170,7 +170,7 @@ include '../partials/admin_header.php';
 
     <div class="col-sm-4">
         <?php foreach ($images as $k => $image): ?>
-            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>" width="100">
+            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>" width="125"> 
             <a href="?delete_image=<?= $image['id']; ?>& <?= csrf(); ?>" onclick="return confirm('Etes vous sur de vouloir suprimer cette image ?');">Supprimer l'image</a>
             <a href="?highlight_image=<?= $image['id']; ?>&id=<?= $_GET['id']; ?>&<?= csrf(); ?>">Mettre à la une</a>
             </p>
@@ -179,17 +179,6 @@ include '../partials/admin_header.php';
     </div>
 </div>
 
-<script>
-(function($){
-
-    $('#duplicatebtn').click(function(e){
-        e.preventDefault();
-        var $clone = $('#duplicate').clone().attr('id', '').removeClass('hidden');
-        $('#duplicate').before($clone);
-    })
-
-})(jQuery);
-</script>
 <?php ob_start(); ?>
         <script src="https://cdn.tiny.cloud/1/eijs0o38u97wpb94p4rkfy6646b0r9g0grgkr7wh48rry4qi/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
@@ -204,6 +193,17 @@ include '../partials/admin_header.php';
       language: 'fr_FR',
     });
     </script>
+    <script>
+(function($){
+
+    $('#duplicatebtn').click(function(e){
+        e.preventDefault();
+        var $clone = $('#duplicate').clone().attr('id', '').removeClass('hidden');
+        $('#duplicate').before($clone);
+    })
+
+})(jQuery);
+</script>
 
     <?php $script = ob_get_clean(); ?>
 
