@@ -164,7 +164,7 @@ include '../partials/admin_header.php';
             <p>
                 <a href="#" class="btn btn-success" id="duplicatebtn">Ajouter une image</a>
             </p>
-            <button type="submit" class="btn btn-default">Enregistrer</button>
+            <button type="submit" class="btn-default">Enregistrer</button>
         </form>
     </div>
 
