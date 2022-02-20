@@ -170,7 +170,7 @@ include '../partials/admin_header.php';
 
     <div class="col-sm-4">
         <?php foreach ($images as $k => $image): ?>
-            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>" width="125"> 
+            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name'] . pathinfo($image['extension']); ?>" width="100"> 
             <a href="?delete_image=<?= $image['id']; ?>& <?= csrf(); ?>" onclick="return confirm('Etes vous sur de vouloir suprimer cette image ?');">Supprimer l'image</a>
             <a href="?highlight_image=<?= $image['id']; ?>&id=<?= $_GET['id']; ?>&<?= csrf(); ?>">Mettre à la une</a>
             </p>
