@@ -16,10 +16,9 @@ $works = $select->fetchAll();
 <div class="row">
     <?php foreach ($works as $k => $work): ?>
         <div class="col-sm-3">
-            <a href="view.php?id=<?= $work['id']; ?>">
-                <img src="<?= WEBROOT; ?>img/works/<?= resizedName($work['image_name'], 150, 150); ?>" alt="">
+            <a href="<?= WEBROOT; ?>realisation/<?= $work['slug']; ?>">
                 <h2><?= $work['name']; ?></h2>
-                <?= resizedName($work['image_name'], 150, 150); ?>
+                <img src="<?= WEBROOT; ?>img/works/<?= $work['image_name']; ?>" width="125", alt="">
             </a>
         </div>
     <?php endforeach ?>

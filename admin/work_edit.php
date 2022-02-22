@@ -41,7 +41,7 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
                 $image_id = $db->lastInsertId();
                 $image_name = $image_id . '.' . $extension;
                 move_uploaded_file($image['tmp_name'], IMAGES . '/works/' . $image_name);
-                resizeImage(IMAGES . '/works/' . $image_name, 150,150);
+                // resizeImage(IMAGES . '/works/' . $image_name, 150,150);
                 $image_name = $db->quote($image_name);
                 $db->query("UPDATE images SET name=$image_name WHERE id = $image_id");
             }
@@ -170,7 +170,7 @@ include '../partials/admin_header.php';
 
     <div class="col-sm-4">
         <?php foreach ($images as $k => $image): ?>
-            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name'] . pathinfo($image['extension']); ?>" width="100"> 
+            <p><img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>" width="100"> 
             <a href="?delete_image=<?= $image['id']; ?>& <?= csrf(); ?>" onclick="return confirm('Etes vous sur de vouloir suprimer cette image ?');">Supprimer l'image</a>
             <a href="?highlight_image=<?= $image['id']; ?>&id=<?= $_GET['id']; ?>&<?= csrf(); ?>">Mettre à la une</a>
             </p>
