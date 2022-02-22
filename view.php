@@ -29,7 +29,9 @@ include 'partials/header.php';
 <?= $work['content']; ?>
 
 <?php foreach ($images as $k => $image): ?>
+    <p>
     <img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>">
+    </p>
 <?php endforeach ?>
 
 
