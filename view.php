@@ -20,6 +20,7 @@ $work_id = $work['id'];
 
 $select = $db->query("SELECT * FROM images WHERE work_id = $work_id");
 $images = $select->fetchAll();
+$title = $work['name'];
 
 include 'partials/header.php';
 ?>
@@ -30,7 +31,7 @@ include 'partials/header.php';
 
 <?php foreach ($images as $k => $image): ?>
     <p>
-    <img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>">
+    <img src="<?= WEBROOT; ?>img/works/<?= $image['name']; ?>"width="100%">
     </p>
 <?php endforeach ?>
 
