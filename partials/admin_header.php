@@ -25,6 +25,7 @@
                     <li>
                         <a href="category.php">Catégories</a>
                         <a href="work.php">Réalisations</a>
+                        <a href="<?= WEBROOT; ?>logout.php">Se déconnecter</a>
                     </li>
                 </ul>
             </div>

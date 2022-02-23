@@ -34,7 +34,7 @@ if($category){
 include 'partials/header.php';
 ?>
 
-<h1<?= $title; ?></h1>
+<h1><?= $title; ?></h1>
 
 <div class="row">
     <div class="col-sm-8">
@@ -58,7 +58,6 @@ include 'partials/header.php';
                 </a>
                 </li>
             <?php endforeach ?>
-            <li></li>
         </ul>
     </div>
 </div>
