@@ -6,7 +6,7 @@
         <meta name="description" content="Portfolio de Mael Cadiou">
         <meta name="author" content="Mael Cadiou">
 
-        <title>Portfolio de Mael Cadiou</title>
+        <title><?= isset($title) ? $title : 'Portfolio de Mael Cadiou'; ?></title>
 
         <link rel="icon" type="image/x-icon" href="icon.png" />
 
@@ -19,7 +19,7 @@
         <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="<?= WEBROOT; ?>">Mon premier Portfolio en PHP</a>
+                    <a class="navbar-brand" href="<?= WEBROOT; ?>">Acceuil</a>
                 </div>
             </div>
         </div>
