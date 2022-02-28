@@ -30,8 +30,7 @@
         </div>
         <div class="container">
 
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
+        <p>&nbsp;</p>
+            
 
             <?= flash(); ?>

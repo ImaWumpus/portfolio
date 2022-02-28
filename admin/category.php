@@ -19,7 +19,7 @@ if(isset($_GET['delete'])){
 /**
  * Catégorie
  */
-$select = $db->query('SELECT id, name, slug FROM categories');
+$select = $db->query('SELECT id, admin, name, slug FROM categories');
 $categories = $select->fetchAll();
 ?>
 
@@ -33,6 +33,7 @@ $categories = $select->fetchAll();
     <thead>
         <tr>
             <th>Id</th>
+            <th>Admin</th>
             <th>Nom</th>
             <th>Actions</th>
         </tr>
@@ -41,7 +42,8 @@ $categories = $select->fetchAll();
         <?php foreach($categories as $category): ?>
         <tr>
             <td><?= $category['id']; ?></td>
-            <td><?= $category['name']; ?></td>
+            <td><?= $category['admin']; ?></td>
+            <td><?= $category['name']; ?></td>           
             <td>
                 <a href="category_edit.php?id<?= '='.$category['id']; ?>" class="btn btn-default">Edit</a>
                 <a href="?delete=<?= $category['id']; ?>&<?= csrf(); ?>" class="btn btn-error" onclick="return confirm('Voulez-vous vraiment supprimer ?');">Supprimer</a>

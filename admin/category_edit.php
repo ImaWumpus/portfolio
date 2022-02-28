@@ -7,11 +7,12 @@ if(isset($_POST['name']) && isset($_POST['slug'])){
     if(preg_match('/^[a-z\-0-9]+$/', $slug)){
         $name = $db->quote($_POST['name']);
         $slug = $db->quote($_POST['slug']);
+        $admin = $db->quote($_POST['admin']);
         if(isset($_GET['id'])){
             $id = $db->quote($_GET['id']);
-            $db->query("UPDATE categories SET name=$name, slug=$slug WHERE id=$id");
+            $db->query("UPDATE categories SET name=$name, slug=$slug, admin=$admin WHERE id=$id");
         }else{
-            $db->query("INSERT INTO categories SET name=$name, slug=$slug");
+            $db->query("INSERT INTO categories SET name=$name, slug=$slug, admin=$admin");
         }
         setFlash('La catégorie à bien été ajoutée');
         header('Location:category.php');
@@ -35,10 +36,8 @@ if(isset($_GET['id'])){
 }
 
 include '../partials/admin_header.php';
+
 ?>
-
-
-
 
 <h1>Editer une catégorie</h1>
 
@@ -52,8 +51,16 @@ include '../partials/admin_header.php';
         <label for="slug">URL de la catégorie</label>
         <?= input('slug'); ?>
     </div>
+    <div class="form-group">
+        <input type="radio" id="admin"
+        name="admin" value="1">
+        <label for="admin">Admin</label>
+        <input type="radio" id="admin"
+        name="admin" value="0">
+        <label for="admin">Utilisateur</label>
+    </div>
     <?= csrfInput(); ?>
-    <button type="submit" class="btn btn-default">Enregistrer</button>
+    <button type="submit" class="btn-default">Enregistrer</button>
 </form>
 
 
